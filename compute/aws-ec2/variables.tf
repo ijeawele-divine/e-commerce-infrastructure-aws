@@ -1,17 +1,17 @@
 variable "environment" {
-  type = "string"
+  type = string
 }
 
 variable "instance_type" {
-  type = "string"
+  type = string
 }
 
 variable "key_name" {
-  type = "string"
+  type = string
 }
 
 variable "instance_name" {
-  type = "string"
+  type = string
 }
 
 variable "subnet_ids" {
