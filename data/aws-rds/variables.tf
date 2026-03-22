@@ -33,5 +33,5 @@ variable "database_name" {
 }
 
 variable "private_subnet_ids" {
-  type = string
+  type = list(string)
 }

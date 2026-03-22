@@ -31,7 +31,6 @@ resource "aws_rds_cluster" "teleios-divine-rds" {
   availability_zones        =  var.availability_zones
   engine                    = "postgres"
   db_cluster_instance_class =  var.db_cluster_instance_class
-  db_subnet_group_name      =  var.private_subnet_ids
   storage_type              = "io1"
   allocated_storage         = 100
   iops                      = 1000
@@ -43,6 +42,6 @@ resource "aws_rds_cluster" "teleios-divine-rds" {
   storage_encrypted = true
 
   backup_retention_period = 7
-  preferred_backup_window = "2:00-3:00"
+  preferred_backup_window = "14:00-15:00"
 }
 

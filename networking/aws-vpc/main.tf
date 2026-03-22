@@ -82,31 +82,25 @@ resource "aws_route_table_association" "private" {
 }
 
 resource "aws_security_group" "teleios-divine-ssh-sg" {
-  name        = "allow_ssh"
-  vpc_id      = aws_vpc.teleios-divine-vpc.id
+  name   = "teleios-divine-${var.environment}-ssh-sg"
+  vpc_id = aws_vpc.teleios-divine-vpc.id
 
-  ingress = [
-    {
-      from_port        = 22
-      to_port          = 22
-      protocol         = "tcp"
-      cidr_blocks      = [aws_vpc.teleios-divine-vpc.cidr_block]
-      ipv6_cidr_blocks = [aws_vpc.teleios-divine-vpc.ipv6_cidr_block]
-    }
-  ]
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [aws_vpc.teleios-divine-vpc.cidr_block]
+  }
 
-  egress = [
-    {
-      from_port        = 0
-      to_port          = 0
-      protocol         = "-1"
-      cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = ["::/0"]
-    }
-  ]
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   tags = {
-    Name = "allow_ssh"
+    Name = "teleios-divine-${var.environment}-ssh-sg"
   }
 }
 

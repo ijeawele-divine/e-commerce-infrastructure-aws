@@ -14,7 +14,16 @@ private_subnets = {
 
 eks_instance_types        = ["t3.medium"]
 ec2_instance_type         = "t3.micro"
-ec2_key_name              = "your-key-name"
+ec2_key_name              = "teleios-divine-dev-key"
 db_cluster_instance_class = "db.t3.medium"
 database_name             = "teleios_dev"
 redis_node_type           = "cache.t3.micro"
+
+ec2_instances = {
+  "web" = { instance_type = "t3.micro" }
+}
+
+s3_buckets = {
+  "assets" = { versioning = true }
+  "logs"   = { versioning = false }
+}
