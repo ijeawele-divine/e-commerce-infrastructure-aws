@@ -39,7 +39,6 @@ resource "aws_db_subnet_group" "teleios-divine-rds-subnet-group" {
 resource "aws_rds_cluster" "teleios-divine-rds" {
   cluster_identifier      = "teleios-divine-${var.environment}-rds"
   engine                  = "aurora-postgresql"
-  engine_version          = "15.4"
   master_username         = var.master_username
   master_password         = var.master_password
   database_name           = var.database_name
