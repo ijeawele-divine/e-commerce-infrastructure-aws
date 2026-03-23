@@ -26,6 +26,16 @@ resource "aws_security_group" "rds_sg" {
   }
 }
 
+resource "aws_db_subnet_group" "teleios-divine-rds-subnet-group" {
+  name       = "teleios-divine-${var.environment}-rds-subnet-group"
+  subnet_ids = var.private_subnet_ids
+
+  tags = {
+    Name        = "teleios-divine-${var.environment}-rds-subnet-group"
+    Environment = var.environment
+  }
+}
+
 resource "aws_rds_cluster" "teleios-divine-rds" {
   cluster_identifier        = "teleios-divine-${var.environment}-rds"
   availability_zones        =  var.availability_zones
@@ -35,7 +45,7 @@ resource "aws_rds_cluster" "teleios-divine-rds" {
   allocated_storage         = 100
   iops                      = 1000
   skip_final_snapshot       = var.skip_final_snapshot
-
+  
   master_username           = var.master_username
   master_password           = var.master_password
   database_name             = var.database_name
