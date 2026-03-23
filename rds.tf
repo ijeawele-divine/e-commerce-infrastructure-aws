@@ -10,7 +10,7 @@ module "rds" {
   availability_zones        = var.availability_zones
   db_cluster_instance_class = var.db_cluster_instance_class
   database_name             = var.database_name
-
+  skip_final_snapshot       = var.skip_final_snapshot
   # sensitive — injected from Terraform Cloud, not .tfvars
   master_username = var.master_username
   master_password = var.master_password

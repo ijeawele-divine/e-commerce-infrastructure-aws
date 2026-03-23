@@ -14,7 +14,7 @@ resource "aws_subnet" "teleios-divine-public-subnet" {
     cidr_block =  each.value.cidr_block
     availability_zone = each.value.availability_zone
     map_public_ip_on_launch = true
-    
+
     tags = {
       Name = "teleios-divine-${var.environment}-public-subnet-${each.key}"
     }
@@ -22,6 +22,11 @@ resource "aws_subnet" "teleios-divine-public-subnet" {
 
 resource "aws_internet_gateway" "teleios-divine-igw" {
     vpc_id = aws_vpc.teleios-divine-vpc.id
+
+    depends_on = [
+    aws_subnet.teleios-divine-public-subnet,
+    aws_nat_gateway.teleios-divine-nat-gateway
+    ]
 
     tags = {
         Name = "teleios-divine-${var.environment}-igw"
@@ -60,6 +65,8 @@ resource "aws_subnet" "teleios-divine-private-subnet" {
 
 resource "aws_eip" "nat" {
   domain = "vpc"
+
+  depends_on = [aws_internet_gateway.teleios-divine-igw]
 }
 
 resource "aws_nat_gateway" "teleios-divine-nat-gateway" {

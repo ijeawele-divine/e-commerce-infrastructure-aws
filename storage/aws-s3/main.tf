@@ -1,6 +1,5 @@
 resource "aws_s3_bucket" "teleios-divine-s3" {
-  bucket = "teleios-divine-${var.environment}-bucket"
-
+  bucket = var.bucket_name
   tags = {
     Name        = "teleios-divine-${var.environment}-bucket"
     Environment = var.environment

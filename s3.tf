@@ -3,6 +3,6 @@ module "s3" {
 
   source      = "./storage/aws-s3"
   environment = var.environment
-  bucket_name = var.bucket_name
+  bucket_name = "teleios-divine-${var.environment}-${each.key}"
   versioning  = each.value.versioning
 }
