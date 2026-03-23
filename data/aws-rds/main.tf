@@ -37,22 +37,24 @@ resource "aws_db_subnet_group" "teleios-divine-rds-subnet-group" {
 }
 
 resource "aws_rds_cluster" "teleios-divine-rds" {
-  cluster_identifier        = "teleios-divine-${var.environment}-rds"
-  availability_zones        =  var.availability_zones
-  engine                    = "postgres"
-  db_cluster_instance_class =  var.db_cluster_instance_class
-  storage_type              = "io1"
-  allocated_storage         = 100
-  iops                      = 1000
-  skip_final_snapshot       = var.skip_final_snapshot
-  
-  master_username           = var.master_username
-  master_password           = var.master_password
-  database_name             = var.database_name
-
-  storage_encrypted = true
-
+  cluster_identifier      = "teleios-divine-${var.environment}-rds"
+  engine                  = "aurora-postgresql"
+  engine_version          = "15.4"
+  master_username         = var.master_username
+  master_password         = var.master_password
+  database_name           = var.database_name
+  storage_encrypted       = true
+  skip_final_snapshot     = var.skip_final_snapshot
   backup_retention_period = 7
-  preferred_backup_window = "14:00-15:00"
+  preferred_backup_window = "02:00-03:00"
+  db_subnet_group_name    = aws_db_subnet_group.teleios-divine-rds-subnet-group.name
+  vpc_security_group_ids  = [aws_security_group.rds_sg.id]
 }
 
+resource "aws_rds_cluster_instance" "teleios-divine-rds-instance" {
+  identifier         = "teleios-divine-${var.environment}-rds-instance"
+  cluster_identifier = aws_rds_cluster.teleios-divine-rds.id
+  instance_class     = var.db_cluster_instance_class
+  engine             = aws_rds_cluster.teleios-divine-rds.engine
+  engine_version     = aws_rds_cluster.teleios-divine-rds.engine_version
+}

@@ -14,7 +14,7 @@ private_subnets = {
 
 eks_instance_types        = ["t3.medium"]
 ec2_key_name              = "teleios-divine-dev-key1"
-db_cluster_instance_class = "db.r6g.large"
+db_cluster_instance_class = "db.t3.medium"
 skip_final_snapshot       = true
 database_name             = "teleios_dev"
 redis_node_type           = "cache.t3.micro"
