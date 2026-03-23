@@ -68,6 +68,10 @@ variable "master_username" {
   description = "RDS master username - set in Terraform Cloud, not in .tfvars"
 }
 
+variable "skip_final_snapshot" {
+  type    = bool
+}
+
 variable "master_password" {
   type        = string
   sensitive   = true
@@ -87,6 +91,7 @@ variable "redis_node_type" {
 variable "s3_buckets" {
   type = map(object({
     versioning = bool
+    bucket_name = string
   }))
   description = "Map of S3 buckets to provision. Key becomes part of the bucket name"
 }

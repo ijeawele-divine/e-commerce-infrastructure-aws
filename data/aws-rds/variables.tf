@@ -35,3 +35,7 @@ variable "database_name" {
 variable "private_subnet_ids" {
   type = list(string)
 }
+
+variable "skip_final_snapshot" {
+  type    = bool
+}

@@ -34,6 +34,7 @@ resource "aws_rds_cluster" "teleios-divine-rds" {
   storage_type              = "io1"
   allocated_storage         = 100
   iops                      = 1000
+  skip_final_snapshot       = var.skip_final_snapshot
 
   master_username           = var.master_username
   master_password           = var.master_password
