@@ -8,6 +8,7 @@ resource "kubectl_manifest" "app_manifests" {
 
   depends_on = [
 #    kubernetes_namespace.app,
+    module.eks,
     kubectl_manifest.rider_external_secret,
     kubectl_manifest.driver_external_secret,
     kubectl_manifest.trip_external_secret,
@@ -15,6 +16,8 @@ resource "kubectl_manifest" "app_manifests" {
     kubectl_manifest.email_external_secret,
     kubectl_manifest.frontend_external_secret,
     helm_release.nginx_ingress,
+    helm_release.external_secrets,
+    module.eks.node_group_status,
     helm_release.cert_manager
   ]
 }
