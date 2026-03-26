@@ -31,7 +31,7 @@ resource "kubectl_manifest" "rider_external_secret" {
       refreshInterval: 1h
       secretStoreRef:
         name: aws-secrets-manager
-        kind: SecretStore
+        kind: ClusterSecretStore
       target:
         name: rider-aws-secret
         creationPolicy: Owner
@@ -51,9 +51,9 @@ resource "kubectl_manifest" "driver_external_secret" {
       name: driver-aws-secret
     spec:
       refreshInterval: 1h
-      secretStoreRef:
+      SecretStoreRef:
         name: aws-secrets-manager
-        kind: SecretStore
+        kind: ClusterSecretStore
       target:
         name: driver-aws-secret
         creationPolicy: Owner
@@ -75,7 +75,7 @@ resource "kubectl_manifest" "trip_external_secret" {
       refreshInterval: 1h
       secretStoreRef:
         name: aws-secrets-manager
-        kind: SecretStore
+        kind: ClusterSecretStore
       target:
         name: trip-aws-secret
         creationPolicy: Owner
@@ -97,7 +97,7 @@ resource "kubectl_manifest" "matching_external_secret" {
       refreshInterval: 1h
       secretStoreRef:
         name: aws-secrets-manager
-        kind: SecretStore
+        kind: ClusterSecretStore
       target:
         name: matching-aws-secret
         creationPolicy: Owner
@@ -119,7 +119,7 @@ resource "kubectl_manifest" "email_external_secret" {
       refreshInterval: 1h
       secretStoreRef:
         name: aws-secrets-manager
-        kind: SecretStore
+        kind: ClusterSecretStore
       target:
         name: email-aws-secret
         creationPolicy: Owner
@@ -141,7 +141,7 @@ resource "kubectl_manifest" "frontend_external_secret" {
       refreshInterval: 1h
       secretStoreRef:
         name: aws-secrets-manager
-        kind: SecretStore
+        kind: ClusterSecretStore
       target:
         name: frontend-aws-secret
         creationPolicy: Owner
