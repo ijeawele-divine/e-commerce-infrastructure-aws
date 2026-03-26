@@ -95,31 +95,31 @@ variable "s3_buckets" {
   description = "Map of S3 buckets to provision. Key becomes part of the bucket name"
 }
 
-variable "JWT_SECRET" {
+variable "jwt_secret" {
   type      = string
   sensitive = true
 }
 
-variable "GOOGLE_CLIENT_ID" {
+variable "google_client_id" {
   type      = string
   sensitive = true
 }
 
-variable "GOOGLE_CLIENT_SECRET" {
+variable "google_client_secret" {
   type      = string
   sensitive = true
 }
 
-variable "AZURE_EMAIL_CONNECTION_STRING" {
+variable "azure_email_connection_string" {
   type      = string
   sensitive = true
 }
 
-variable "SENDER_EMAIL" {
+variable "sender_email" {
   type = string
 }
 
-variable "NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN" {
+variable "next_public_mapbox_access_token" {
   type      = string
   sensitive = true
 }
