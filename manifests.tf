@@ -6,6 +6,8 @@ resource "kubectl_manifest" "app_manifests" {
   for_each  = local.manifest_files
   yaml_body = file("${path.module}/k8s/applications/${each.value}")
 
+  wait_for_rollout = false 
+  
   depends_on = [
 #    kubernetes_namespace.app,
     module.eks,

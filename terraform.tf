@@ -63,6 +63,8 @@ provider "kubectl" {
     command     = "aws"
     args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
   }
+  load_config_file       = false
+  apply_retry_count      = 5 
 }
 
 # connects directly to your Aurora cluster to create databases
