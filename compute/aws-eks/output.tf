@@ -34,3 +34,7 @@ output "oidc_provider_arn" {
 output "oidc_provider_url" {
   value = aws_iam_openid_connect_provider.teleios-divine-eks.url
 }
+
+output "node_group_status" {
+  value = aws_eks_node_group.teleios-divine-node-group.status
+}

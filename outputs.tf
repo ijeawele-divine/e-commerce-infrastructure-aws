@@ -50,6 +50,3 @@ output "redis_port" {
   value = module.redis.redis_port
 }
 
-output "node_group_status" {
-  value = aws_eks_node_group.teleios-divine-node-group.status
-}
