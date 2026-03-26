@@ -40,6 +40,8 @@ resource "aws_eks_cluster" "teleios-divine-eks" {
 
   vpc_config {
     subnet_ids = var.subnet_ids
+    endpoint_private_access = true
+    endpoint_public_access = true
   }
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
@@ -120,8 +122,6 @@ resource "aws_lb" "teleios-divine-alb" {
     Environment = var.environment
   }
 }
-
-# add this to the bottom of compute/aws-eks/main.tf
 
 data "tls_certificate" "teleios-divine-eks" {
   url = aws_eks_cluster.teleios-divine-eks.identity[0].oidc[0].issuer
