@@ -3,7 +3,7 @@
 resource "kubectl_manifest" "secret_store" {
   yaml_body = <<-YAML
     apiVersion: external-secrets.io/v1beta1
-    kind: SecretStore
+    kind: ClusterSecretStore
     metadata:
       name: aws-secrets-manager
     spec:

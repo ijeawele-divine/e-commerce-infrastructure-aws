@@ -13,6 +13,14 @@ resource "aws_security_group" "rds_sg" {
     security_groups = [var.eks_node_security_group_id]
   }
 
+  ingress {
+    description = "Temporary - PostgreSQL from Terraform Cloud"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -56,4 +64,5 @@ resource "aws_rds_cluster_instance" "teleios-divine-rds-instance" {
   instance_class     = var.db_cluster_instance_class
   engine             = aws_rds_cluster.teleios-divine-rds.engine
   engine_version     = aws_rds_cluster.teleios-divine-rds.engine_version
+  publicly_accessible = true
 }
