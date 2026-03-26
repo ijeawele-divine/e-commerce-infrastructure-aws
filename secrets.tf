@@ -122,7 +122,7 @@ resource "aws_secretsmanager_secret_version" "frontend" {
     NEXT_PUBLIC_TRIP_SERVICE_URL     = "https://rideshare.ijeaweledivine.online/api/trips"
     NEXT_PUBLIC_MATCHING_SERVICE_URL = "https://rideshare.ijeaweledivine.online/matching"
     NEXT_PUBLIC_TRIP_WS_URL          = "wss://rideshare.ijeaweledivine.online"
-    NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN  = var.mapbox_access_token
+    NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN  = var.next_public_mapbox_access_token
     NEXT_PUBLIC_WS_URL               = "wss://rideshare.ijeaweledivine.online/ws"
   })
 }

@@ -17,15 +17,16 @@ resource "helm_release" "external_secrets" {
   namespace  = kubernetes_namespace.external_secrets.metadata[0].name
   version    = "0.9.11"
 
-  set {
-    name  = "installCRDs"
-    value = "true"
-  }
-
-  set {
-    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-    value = aws_iam_role.external_secrets_role.arn
-  }
+  values = [
+    yamlencode({
+      installCRDs = true
+      serviceAccount = {
+        annotations = {
+          "eks.amazonaws.com/role-arn" = aws_iam_role.external_secrets_role.arn
+        }
+      }
+    })
+  ]
 
   depends_on = [
     module.eks,
@@ -41,7 +42,7 @@ resource "helm_release" "cert_manager" {
   create_namespace = true
   version          = "v1.14.4"
 
-  set {
+  set = {
     name  = "installCRDs"
     value = "true"
   }
@@ -57,7 +58,7 @@ resource "helm_release" "nginx_ingress" {
   create_namespace = true
   version          = "4.10.0"
 
-  set {
+  set = {
     name  = "controller.service.type"
     value = "LoadBalancer"
   }
