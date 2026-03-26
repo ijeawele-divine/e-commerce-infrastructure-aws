@@ -42,10 +42,11 @@ resource "helm_release" "cert_manager" {
   create_namespace = true
   version          = "v1.14.4"
 
-  set = {
-    name  = "installCRDs"
-    value = "true"
-  }
+  values = [
+    yamlencode({
+      installCRDs = true
+    })
+  ]
 
   depends_on = [module.eks]
 }
@@ -58,10 +59,15 @@ resource "helm_release" "nginx_ingress" {
   create_namespace = true
   version          = "4.10.0"
 
-  set = {
-    name  = "controller.service.type"
-    value = "LoadBalancer"
-  }
+  values = [
+    yamlencode({
+      controller = {
+        service = {
+          type = "LoadBalancer"
+        }
+      }
+    })
+  ]
 
   depends_on = [module.eks]
 }
