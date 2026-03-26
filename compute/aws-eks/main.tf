@@ -137,3 +137,13 @@ resource "aws_iam_openid_connect_provider" "teleios-divine-eks" {
     Environment = var.environment
   }
 }
+
+resource "aws_security_group_rule" "eks_api_public" {
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_eks_cluster.teleios-divine-eks.vpc_config[0].cluster_security_group_id
+  description       = "Allow public access to EKS API server"
+}
