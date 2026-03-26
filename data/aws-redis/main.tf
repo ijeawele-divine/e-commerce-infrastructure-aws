@@ -54,7 +54,7 @@ resource "aws_elasticache_replication_group" "teleios-divine-redis" {
   security_group_ids         = [aws_security_group.teleios-divine-redis-sg.id]                      # ✅ Added
 
   at_rest_encryption_enabled = true    
-  transit_encryption_enabled = true   
+  transit_encryption_enabled = false   
 
   lifecycle {
     ignore_changes = [num_cache_clusters]

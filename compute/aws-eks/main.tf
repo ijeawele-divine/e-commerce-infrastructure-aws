@@ -120,3 +120,20 @@ resource "aws_lb" "teleios-divine-alb" {
     Environment = var.environment
   }
 }
+
+# add this to the bottom of compute/aws-eks/main.tf
+
+data "tls_certificate" "teleios-divine-eks" {
+  url = aws_eks_cluster.teleios-divine-eks.identity[0].oidc[0].issuer
+}
+
+resource "aws_iam_openid_connect_provider" "teleios-divine-eks" {
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = [data.tls_certificate.teleios-divine-eks.certificates[0].sha1_fingerprint]
+  url             = aws_eks_cluster.teleios-divine-eks.identity[0].oidc[0].issuer
+
+  tags = {
+    Name        = "teleios-divine-${var.environment}-eks-oidc"
+    Environment = var.environment
+  }
+}

@@ -94,3 +94,32 @@ variable "s3_buckets" {
   }))
   description = "Map of S3 buckets to provision. Key becomes part of the bucket name"
 }
+
+variable "jwt_secret" {
+  type      = string
+  sensitive = true
+}
+
+variable "google_client_id" {
+  type      = string
+  sensitive = true
+}
+
+variable "google_client_secret" {
+  type      = string
+  sensitive = true
+}
+
+variable "azure_email_connection_string" {
+  type      = string
+  sensitive = true
+}
+
+variable "sender_email" {
+  type = string
+}
+
+variable "mapbox_access_token" {
+  type      = string
+  sensitive = true
+}

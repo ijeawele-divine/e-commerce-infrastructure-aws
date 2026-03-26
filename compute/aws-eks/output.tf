@@ -26,3 +26,11 @@ output "cluster_security_group_id" {
 output "eks_node_security_group_id" {
   value = aws_eks_cluster.teleios-divine-eks.vpc_config[0].cluster_security_group_id
 }
+
+output "oidc_provider_arn" {
+  value = aws_iam_openid_connect_provider.teleios-divine-eks.arn
+}
+
+output "oidc_provider_url" {
+  value = aws_iam_openid_connect_provider.teleios-divine-eks.url
+}
