@@ -51,7 +51,7 @@ resource "kubectl_manifest" "driver_external_secret" {
       name: driver-aws-secret
     spec:
       refreshInterval: 1h
-      SecretStoreRef:
+      secretStoreRef:
         name: aws-secrets-manager
         kind: ClusterSecretStore
       target:
