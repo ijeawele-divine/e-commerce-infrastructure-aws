@@ -56,6 +56,8 @@ resource "aws_rds_cluster" "teleios-divine-rds" {
   preferred_backup_window = "02:00-03:00"
   db_subnet_group_name    = aws_db_subnet_group.teleios-divine-rds-subnet-group.name
   vpc_security_group_ids  = [aws_security_group.rds_sg.id]
+
+  apply_immediately = true
 }
 
 resource "aws_rds_cluster_instance" "teleios-divine-rds-instance" {
