@@ -136,7 +136,7 @@ resource "kubectl_manifest" "frontend_external_secret" {
     apiVersion: external-secrets.io/v1beta1
     kind: ExternalSecret
     metadata:
-      name: frontend-aws-secret
+      name: rideshare-frontend-aws-secret
     spec:
       refreshInterval: 1h
       secretStoreRef:
