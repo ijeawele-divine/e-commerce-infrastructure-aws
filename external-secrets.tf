@@ -143,7 +143,7 @@ resource "kubectl_manifest" "frontend_external_secret" {
         name: aws-secrets-manager
         kind: ClusterSecretStore
       target:
-        name: frontend-aws-secret
+        name: rideshare-frontend-aws-secret
         creationPolicy: Owner
       dataFrom:
         - extract:
