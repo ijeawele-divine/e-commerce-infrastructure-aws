@@ -115,13 +115,13 @@ resource "aws_secretsmanager_secret" "frontend" {
 }
 
 resource "aws_secretsmanager_secret_version" "frontend" {
-  secret_id     = aws_secretsmanager_secret.frontend.id
+  secret_id = aws_secretsmanager_secret.frontend.id
   secret_string = jsonencode({
-    NEXT_PUBLIC_DRIVER_SERVICE_URL   = "https://rideshare.ijeaweledivine.online/driver"
-    NEXT_PUBLIC_RIDER_SERVICE_URL    = "https://rideshare.ijeaweledivine.online/rider"
+    NEXT_PUBLIC_RIDER_SERVICE_URL    = "https://rideshare.ijeaweledivine.online/api/v1/riders"
+    NEXT_PUBLIC_DRIVER_SERVICE_URL   = "https://rideshare.ijeaweledivine.online/api/v1/drivers"
     NEXT_PUBLIC_TRIP_SERVICE_URL     = "https://rideshare.ijeaweledivine.online/api/trips"
-    NEXT_PUBLIC_MATCHING_SERVICE_URL = "https://rideshare.ijeaweledivine.online/matching"
-    NEXT_PUBLIC_TRIP_WS_URL          = "wss://rideshare.ijeaweledivine.online"
+    NEXT_PUBLIC_MATCHING_SERVICE_URL = "https://rideshare.ijeaweledivine.online/api/v1/matching"
+    NEXT_PUBLIC_TRIP_WS_URL          = "wss://rideshare.ijeaweledivine.online/ws"
     NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN  = var.next_public_mapbox_access_token
     NEXT_PUBLIC_WS_URL               = "wss://rideshare.ijeaweledivine.online/ws"
   })
