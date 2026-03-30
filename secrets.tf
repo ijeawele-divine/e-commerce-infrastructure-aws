@@ -27,6 +27,9 @@ resource "aws_secretsmanager_secret_version" "rider_service" {
     REDIS_PORT           = "6379"
     REDIS_PASSWORD       = ""
     EMAIL_SERVICE_URL    = "http://email-service:80"
+    DB_HOST         = module.rds.rds_endpoint
+    DB_USER          = var.master_username
+    DB_PASSWORD      = var.master_password
   })
   depends_on = [module.rds, module.redis]
 }
@@ -52,6 +55,9 @@ resource "aws_secretsmanager_secret_version" "driver_service" {
     REDIS_PORT        = "6379"
     REDIS_PASSWORD    = ""
     EMAIL_SERVICE_URL = "http://email-service:80"
+    DB_HOST         = module.rds.rds_endpoint
+    DB_USER          = var.master_username
+    DB_PASSWORD      = var.master_password
   })
   depends_on = [module.rds, module.redis]
 }
@@ -71,6 +77,9 @@ resource "aws_secretsmanager_secret_version" "trip_service" {
     DATABASE_URL    = "${local.db_url_base}/trip_db"
     REDIS_URL       = local.redis_url
     REDIS_TLS       = "false"
+    DB_HOST         = module.rds.rds_endpoint
+    DB_USER         = var.master_username
+    DB_PASSWORD     = var.master_password
   })
   depends_on = [module.rds, module.redis]
 }
@@ -90,6 +99,9 @@ resource "aws_secretsmanager_secret_version" "matching_service" {
     DATABASE_URL     = "${local.db_url_base}/matching_db"
     REDIS_URL        = local.redis_url
     REDIS_TLS        = "false"
+    DB_HOST         = module.rds.rds_endpoint
+    DB_USER          = var.master_username
+    DB_PASSWORD      = var.master_password
   })
   depends_on = [module.rds, module.redis]
 }
@@ -117,11 +129,11 @@ resource "aws_secretsmanager_secret" "frontend" {
 resource "aws_secretsmanager_secret_version" "frontend" {
   secret_id = aws_secretsmanager_secret.frontend.id
   secret_string = jsonencode({
-    NEXT_PUBLIC_RIDER_SERVICE_URL    = "https://rideshare.ijeaweledivine.online/api/v1/riders"
-    NEXT_PUBLIC_DRIVER_SERVICE_URL   = "https://rideshare.ijeaweledivine.online/api/v1/drivers"
-    NEXT_PUBLIC_TRIP_SERVICE_URL     = "https://rideshare.ijeaweledivine.online/api/trips"
-    NEXT_PUBLIC_MATCHING_SERVICE_URL = "https://rideshare.ijeaweledivine.online/api/v1/matching"
-    NEXT_PUBLIC_TRIP_WS_URL          = "wss://rideshare.ijeaweledivine.online/ws"
+    NEXT_PUBLIC_RIDER_SERVICE_URL    = "https://rideshare.ijeaweledivine.online"
+    NEXT_PUBLIC_DRIVER_SERVICE_URL   = "https://rideshare.ijeaweledivine.online"
+    NEXT_PUBLIC_TRIP_SERVICE_URL     = "https://rideshare.ijeaweledivine.online"
+    NEXT_PUBLIC_MATCHING_SERVICE_URL = "https://rideshare.ijeaweledivine.online"
+    NEXT_PUBLIC_TRIP_WS_URL          = "wss://rideshare.ijeaweledivine.online"
     NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN  = var.next_public_mapbox_access_token
     NEXT_PUBLIC_WS_URL               = "wss://rideshare.ijeaweledivine.online/ws"
   })
