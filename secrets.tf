@@ -49,7 +49,7 @@ resource "aws_secretsmanager_secret_version" "driver_service" {
     JWT_EXPIRES_IN    = "7d"
     FRONTEND_URL      = "https://rideshare.ijeaweledivine.online"
     RIDER_SERVICE_URL = "http://rider-service:80"
-    TRIP_SERVICE_URL  = "http://trip-service:80/api"
+    TRIP_SERVICE_URL  = "http://trip-service:80"
     DATABASE_URL      = "${local.db_url_base}/driver_db"
     REDIS_HOST        = local.redis_endpoint
     REDIS_PORT        = "6379"
